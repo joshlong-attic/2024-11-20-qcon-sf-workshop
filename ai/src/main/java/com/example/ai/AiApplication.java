@@ -17,7 +17,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import java.util.List;
 
 @SpringBootApplication
-@RegisterReflectionForBinding ( DogAdoptionSuggestion.class)
+@RegisterReflectionForBinding(DogAdoptionSuggestion.class)
 public class AiApplication {
 
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class AiApplication {
                     .prompt()
                     .user("do you have any neurotic dogs?")
                     .call()
-                    .entity( DogAdoptionSuggestion.class);
+                    .entity(DogAdoptionSuggestion.class);
             System.out.println("content [" + content + "]");
         };
     }
@@ -41,14 +41,13 @@ public class AiApplication {
             ChatClient.Builder builder,
             @Value("classpath:/my-system-prompt.md") Resource prompt,
             DogRepository repository, VectorStore vectorStore) {
-
-        if (false)
-        repository.findAll().forEach(dog -> {
-            var dogument = new Document("id: %s, name: %s, description: %s".formatted(
-                    dog.id(), dog.name(), dog.description()
-            ));
-            vectorStore.add(List.of(dogument));
-        });
+ 
+            repository.findAll().forEach(dog -> {
+                var dogument = new Document("id: %s, name: %s, description: %s".formatted(
+                        dog.id(), dog.name(), dog.description()
+                ));
+                vectorStore.add(List.of(dogument));
+            });
 
         return builder
                 .defaultSystem(prompt)
@@ -63,4 +62,5 @@ record Dog(@Id int id, String name, String description) {
 interface DogRepository extends ListCrudRepository<Dog, Integer> {
 }
 
-record DogAdoptionSuggestion (int id, String name, String description) {}
+record DogAdoptionSuggestion(int id, String name, String description) {
+}
