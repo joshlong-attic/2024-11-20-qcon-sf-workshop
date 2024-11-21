@@ -42,21 +42,6 @@ public class PasswordlessApplication {
         };
     }
 
-/*    @Bean
-    @Order(1)
-    SecurityFilterChain authServerFilterChain(HttpSecurity http) throws Exception {
-//        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
-        http
-                .exceptionHandling((exceptions) -> exceptions
-                        .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                        )
-                )
-                .oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
-        return http.build();
-    }*/
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
