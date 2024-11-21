@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Collection;
 import java.util.Set;
 
 @SpringBootApplication
